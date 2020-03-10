@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service-dep
+  labels:
+    app: user-service-app
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: user-service-app
+  template:
+    metadata:
+      labels:
+        app: user-service-app
+    spec:
+      dnsPolicy: ClusterFirst 
+      containers:
+      - name: user-service
+        image: syndemo/user-service:latest
+        ports:
+        - containerPort: 9000
+      

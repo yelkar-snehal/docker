@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-db-dep
+  labels:
+    app: user-db-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-db-app
+  template:
+    metadata:
+      labels:
+        app: user-db-app
+    spec: 
+      containers: 
+      - 
+        env: 
+          - 
+            name: MYSQL_ROOT_PASSWORD
+            value: training
+          - 
+            name: MYSQL_DATABASE
+            value: user-service
+          - 
+            name: MYSQL_USER
+            value: docker
+          - 
+            name: MYSQL_PASSWORD
+            value: training
+        image: "mysql:5.5"
+        name: user-db
+        ports: 
+          - 
+            containerPort: 3306
+      dnsPolicy: ClusterFirst

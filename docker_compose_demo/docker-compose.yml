@@ -1,0 +1,54 @@
+version: "2.0"
+services:
+  user-db:
+    environment:
+      MYSQL_DATABASE: user-service
+      MYSQL_PASSWORD: training
+      MYSQL_ROOT_PASSWORD: training
+      MYSQL_USER: docker
+    image: mysql:5.5
+    ports:
+    - 3307:3306
+  user-service:
+    image: snehalsynerzip/user-service:1.0
+    ports:
+    - 9000:9000
+    depends_on:
+      - user-db
+  product-db:
+    environment:
+      MYSQL_DATABASE: product-service
+      MYSQL_PASSWORD: training
+      MYSQL_ROOT_PASSWORD: training
+      MYSQL_USER: docker
+    image: mysql:5.5
+    ports:
+    - 3308:3306
+  product-service:
+      image: snehalsynerzip/product-service:1.0
+      ports:
+      - 9001:9001
+      depends_on:
+      - product-db
+  review-db:
+    environment:
+      MYSQL_DATABASE: review-service
+      MYSQL_PASSWORD: training
+      MYSQL_ROOT_PASSWORD: training
+      MYSQL_USER: docker
+    image: mysql:5.5
+    ports:
+    - 3309:3306
+  review-service:
+    image: snehalsynerzip/review-service:1.0
+    ports:
+    - 9002:9002
+    depends_on:
+    - review-db
+
+
+
+
+
+
+
