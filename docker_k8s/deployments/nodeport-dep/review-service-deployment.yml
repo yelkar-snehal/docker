@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: review-service-dep
+  labels:
+    app: review-service-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: review-service-app
+  template:
+    metadata:
+      labels:
+        app: review-service-app
+    spec:
+      dnsPolicy: ClusterFirst
+      containers:
+      - name:  review-service
+        image: snehalsynerzip/review-service:1.0
+        ports:
+        - containerPort: 9002

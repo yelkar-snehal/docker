@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-db-dep
+  labels:
+    app: product-db-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-db-app
+  template:
+    metadata:
+      labels:
+        app: product-db-app
+    spec: 
+      containers: 
+      - 
+        env: 
+          - 
+            name: MYSQL_ROOT_PASSWORD
+            value: training
+          - 
+            name: MYSQL_DATABASE
+            value: product-service
+          - 
+            name: MYSQL_USER
+            value: docker
+          - 
+            name: MYSQL_PASSWORD
+            value: training
+        image: "mysql:5.5"
+        name: product-db
+        ports: 
+          - 
+            containerPort: 3306
+      dnsPolicy: ClusterFirst
