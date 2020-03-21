@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: my-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /my-app
+        backend:
+          serviceName: my-service
+          servicePort: 8080
+      - path: /user-service/(.*)
+        backend:
+          serviceName: user-service
+          servicePort: 9000
+      - path: /product-service/(.*)
+        backend:
+          serviceName: product-service
+          servicePort: 9001
+      - path: /review-service/(.*)
+        backend:
+          serviceName: review-service
+          servicePort: 9002
